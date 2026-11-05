@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#10152a" />
+  <meta name="description" content="StudyFlow: planeje seus estudos conforme provas, dificuldade e tempo disponível." />
+  <title>StudyFlow — Seu plano de estudos, sem complicação</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#inicio" aria-label="StudyFlow, ir para início">
+        <span class="brand-icon" aria-hidden="true">✦</span>
+        <span>Study<span class="brand-accent">Flow</span><small>PLANEJAMENTO INTELIGENTE</small></span>
+      </a>
+      <div class="side-caption">ESPAÇO DE ESTUDOS</div>
+      <nav class="nav" aria-label="Navegação principal">
+        <a href="#inicio" class="nav-link active" data-nav="inicio"><span>▦</span> Visão geral</a>
+        <a href="#materias" class="nav-link" data-nav="materias"><span>▤</span> Minhas avaliações</a>
+        <a href="#disponibilidade" class="nav-link" data-nav="disponibilidade"><span>◷</span> Minha disponibilidade</a>
+        <a href="#cronograma" class="nav-link" data-nav="cronograma"><span>▥</span> Cronograma</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card"><span class="help-emoji">💡</span><strong>Uma coisa de cada vez.</strong><p>Cadastre suas provas, defina seu tempo e deixe o plano com a gente.</p></div>
+        <span class="local-note">🔒 Dados salvos apenas neste navegador.</span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar"><div class="breadcrumbs">Meu espaço <span>/</span> <strong>Planejamento</strong></div><div class="today-pill" id="today-label">Hoje</div></header>
+      <section id="inicio" class="hero section-anchor">
+        <div class="hero-copy"><span class="eyebrow"><span class="dot"></span> SEU ESTUDO, NO SEU RITMO</span><h1>Menos preocupação.<br><em>Mais aprendizado.</em></h1><p>Organize suas provas, descubra o que merece mais atenção e transforme seu tempo livre em um plano de estudos possível de cumprir.</p><div class="hero-actions"><a href="#materias" class="btn btn-primary">+ Adicionar avaliação</a><button id="example-btn" class="btn btn-ghost" type="button">Experimentar com exemplo ↗</button></div></div>
+        <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="hero-square"><span>✦</span><div class="mock-line long"></div><div class="mock-line"></div><div class="mini-progress"><i></i></div></div><div class="floating-chip chip-top">✓ Progresso</div><div class="floating-chip chip-bottom">↗ Seu ritmo</div></div>
+      </section>
+
+      <section class="stats" aria-label="Resumo dos estudos">
+        <article class="stat-card"><span class="stat-icon purple">▤</span><span class="stat-label">AVALIAÇÕES ATIVAS</span><strong id="stat-exams">0</strong><small>Provas por preparar</small></article>
+        <article class="stat-card"><span class="stat-icon orange">◷</span><span class="stat-label">PRÓXIMA AVALIAÇÃO</span><strong id="stat-next">—</strong><small id="stat-next-caption">Nenhuma cadastrada</small></article>
+        <article class="stat-card"><span class="stat-icon green">✓</span><span class="stat-label">SESSÕES CONCLUÍDAS</span><strong id="stat-done">0%</strong><small id="stat-done-caption">Gere um plano para começar</small></article>
+      </section>
+
+      <section class="content-grid">
+        <div class="primary-column">
+          <section id="materias" class="panel section-anchor">
+            <div class="panel-header"><div><span class="kicker">PASSO 01</span><h2>Suas avaliações</h2><p>Inclua as matérias e as datas das provas.</p></div><span class="count-tag" id="subject-count">0 matérias</span></div>
+            <form id="subject-form" class="subject-form">
+              <div class="field"><label for="subject-name">Nome da matéria</label><input id="subject-name" maxlength="55" placeholder="Ex.: Estrutura de Dados" required /></div>
+              <div class="field"><label for="subject-date">Data da avaliação</label><input id="subject-date" type="date" required /></div>
+              <div class="two-fields"><div class="field"><label for="subject-difficulty">Dificuldade</label><select id="subject-difficulty"><option value="1">Fácil</option><option value="2" selected>Média</option><option value="3">Difícil</option></select></div><div class="field"><label for="subject-mastery">Seu domínio: <strong id="mastery-value">50%</strong></label><input id="subject-mastery" type="range" min="0" max="100" step="10" value="50" /></div></div>
+              <button type="submit" class="btn btn-primary btn-full">+ Adicionar matéria</button>
+            </form>
+            <div class="list-heading"><h3>Matérias cadastradas</h3><small id="subjects-hint">Organizadas pela data da prova</small></div>
+            <div id="subjects-list" class="subject-list"><div class="empty-list">Nenhuma avaliação por aqui ainda. Comece adicionando uma matéria acima.</div></div>
+          </section>
+
+          <section id="cronograma" class="panel section-anchor schedule-panel">
+            <div class="panel-header"><div><span class="kicker">SEU PLANEJAMENTO</span><h2>Cronograma de estudos</h2><p id="plan-subtitle">Um dia de cada vez, com prioridades claras.</p></div><button id="generate-btn" type="button" class="btn btn-primary">✦ Gerar plano</button></div>
+            <div id="plan-explanation" class="info-note">✨ Adicione uma avaliação e defina seu tempo disponível. Depois clique em <strong>Gerar plano</strong>.</div>
+            <div id="schedule-list" class="schedule-list"><div class="empty-schedule"><span>▦</span><strong>Seu plano começa aqui</strong><p>Seu cronograma aparecerá quando você gerar o planejamento.</p></div></div>
+          </section>
+        </div>
+
+        <div class="secondary-column">
+          <section id="disponibilidade" class="panel section-anchor time-panel"><div class="panel-header"><div><span class="kicker">PASSO 02</span><h2>Seu tempo disponível</h2><p>Quantas horas consegue estudar em cada dia?</p></div></div>
+            <div class="time-list" id="availability-list"></div><p class="time-footnote">0h = dia de descanso. O cronograma respeita seus limites.</p>
+            <div class="weekly-total"><span>Tempo disponível por semana</span><strong id="weekly-total">0h</strong></div>
+          </section>
+          <section class="panel tips-panel"><span class="kicker">COMO FUNCIONA</span><h2>Um plano que faz sentido.</h2><div class="tip"><span>01</span><p><strong>Prazo da prova</strong><br>Provas próximas recebem atenção maior.</p></div><div class="tip"><span>02</span><p><strong>Dificuldade da matéria</strong><br>Conteúdos mais difíceis pesam mais.</p></div><div class="tip"><span>03</span><p><strong>Seu domínio</strong><br>Quanto menos você domina, mais precisa revisar.</p></div><div class="tip"><span>04</span><p><strong>Sua disponibilidade</strong><br>O plano nunca ultrapassa as horas informadas.</p></div></section>
+        </div>
+      </section>
+      <footer>StudyFlow • Projeto acadêmico de planejamento de estudos • Funciona sem conta e sem servidor.</footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
